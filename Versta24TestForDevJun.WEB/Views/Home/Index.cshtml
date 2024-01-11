@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Versta24TestForDevJun.BLL.Models.Order>
+@{
+    ViewData["Title"] = "Главная страница";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Список заказов</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Идентификатор</th>
+                <th>Адрес отправителя</th>
+                <th>Город отправителя</th>
+                <th>Адрес получателя</th>
+                <th>Город получателя</th>
+                <th>Вес груза</th>
+                <th>Дата забора груза</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.SenderAddress</td>
+                    <td>@item.SenderCity</td>
+                    <td>@item.RecipientAddress</td>
+                    <td>@item.RecipientCity</td>
+                    <td>@item.CargoWeight</td>
+                    <td>@item.CargoPickUpDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
