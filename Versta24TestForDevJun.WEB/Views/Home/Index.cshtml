@@ -10,7 +10,7 @@
             @foreach (var item in Model)
             {
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 btn">
-                    <div class="card text-center" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-item-id="@item">
+                    <div class="card text-center" data-bs-toggle="modal" data-bs-target="#modalShow" data-item-id="@item">
                         <div class="card-body">
                             <h5 class="card-title">Заказ №@item</h5>
                         </div>
@@ -21,17 +21,58 @@
     </div>
 </div>
 
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="modalShow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalShowLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Заказ</h5>
+                <h5 class="modal-title" id="modalShowLabel">Заказ</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 ...
             </div>
             
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalCreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalCreateLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCreateLabel">Создание заказа</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formCreateOrder">
+                    <div class="form-group">
+                        <label for="senderCity">Город отправителя</label>
+                        <input type="text" name="SenderCity" id="senderCity" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="senderAddress">Адрес отправителя</label>
+                        <input type="text" name="SenderAddress" id="senderAddress" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="recipientCity">Город получателя</label>
+                        <input type="text" name="RecipientCity" id="recipientCity" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="recipientAddress">Адрес получателя</label>
+                        <input type="text" name="RecipientAddress" id="recipientAddress" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="cargoWeight">Вес груза, (г)</label>
+                        <input type="number" min="0.01" step="0.01" name="CargoWeight" id="cargoWeight" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="cargoPickUpDate">Дата забора груза</label>
+                        <input type="date" name="CargoPickUpDate" id="cargoPickUpDate" required />
+                    </div>
+                    <button type="submit" class="btn btn-outline-dark">Создать</button>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>

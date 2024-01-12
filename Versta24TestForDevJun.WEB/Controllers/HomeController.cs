@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Versta24TestForDevJun.BLL.Models;
 using Versta24TestForDevJun.BLL.Services.Abstract;
 using Versta24TestForDevJun.WEB.Models;
 
@@ -43,6 +44,19 @@ namespace Versta24TestForDevJun.WEB.Controllers
                 CargoWeight = order.CargoWeight,
                 CargoPickUpDate = order.CargoPickUpDate
             });
+        }
+
+        [HttpPost("Home/CreateOrder/")]
+        public IActionResult CreateOrder([FromBody] OrderCreationDTO order)
+        {
+            if (order == null)
+            {
+                return BadRequest();
+            }
+
+            _orderService.CreateAsync(order);
+
+            return Ok();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

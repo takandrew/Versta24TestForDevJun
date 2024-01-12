@@ -1,4 +1,4 @@
-﻿$('#staticBackdrop').on('show.bs.modal', function (event) {
+﻿$('#modalShow').on('show.bs.modal', function (event) {
     let button = $(event.relatedTarget); // Кнопка, которая открыла модальное окно
     let itemId = button.data('item-id'); // Получение идентификатора заказа из атрибута data-item-id
 
@@ -8,7 +8,7 @@
         type: 'GET',
         success: function (data) {
             // Обновление содержимого модального окна с полученными данными
-            let modal = $('#staticBackdrop');
+            let modal = $('#modalShow');
             modal.find('.modal-title').text('Заказ №' + data.id);
             modal.find('.modal-body').empty();
 
@@ -89,6 +89,38 @@
             div.append(label).append(input);
 
             modal.find('.modal-body').append(div);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('Ошибка AJAX:', errorThrown);
+        }
+    });
+});
+
+
+$('#formCreateOrder').submit(function (event) {
+    // Отменить стандартное поведение формы (перезагрузка страницы)
+    event.preventDefault();
+
+    // Получить данные формы
+    var formData = JSON.stringify($(this).serializeArray());
+        
+    var dataArray = JSON.parse(formData);
+    var dataObject = {};
+
+    dataArray.forEach(function (item) {
+        dataObject[item.name] = item.value;
+    });
+
+    console.log(dataObject);
+    
+    // Выполнить AJAX-запрос
+    $.ajax({
+        url: 'Home/CreateOrder',
+        method: 'POST',
+        data: JSON.stringify(dataObject),
+        contentType: 'application/json',
+        success: function (response) {
+            location.reload();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log('Ошибка AJAX:', errorThrown);

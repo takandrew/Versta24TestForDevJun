@@ -1,4 +1,6 @@
-﻿using Versta24TestForDevJun.BLL.Services.Abstract;
+﻿using System.Globalization;
+using Versta24TestForDevJun.BLL.Models;
+using Versta24TestForDevJun.BLL.Services.Abstract;
 using Versta24TestForDevJun.DAL.DataAccess.Abstract;
 
 namespace Versta24TestForDevJun.BLL.Services.Implementation
@@ -12,17 +14,30 @@ namespace Versta24TestForDevJun.BLL.Services.Implementation
             _repository = repository;
         }
 
-        public async Task CreateAsync(Models.Order entity)
+        public async Task CreateAsync(OrderCreationDTO entity)
         {
+            double cargoWeightDouble;
+
+            if (!double.TryParse(entity.CargoWeight, NumberStyles.Float, CultureInfo.InvariantCulture, out cargoWeightDouble))
+            {
+                throw new ArgumentException("Не удалось распарсить CargoWeight из string в double.");
+            }
+
+            DateOnly cargoPickUpDateDateOnly;
+
+            if (!DateOnly.TryParse(entity.CargoPickUpDate, out cargoPickUpDateDateOnly))
+            {
+                throw new ArgumentException("Не удалось распарсить CargoPickUpDate из string в DateOnly.");
+            }
+
             await _repository.CreateAsync(new DAL.Entities.Order
             {
-                Id = entity.Id,
                 SenderAddress = entity.SenderAddress,
                 SenderCity = entity.SenderCity,
                 RecipientAddress = entity.RecipientAddress,
                 RecipientCity = entity.RecipientCity,
-                CargoWeight = entity.CargoWeight,
-                CargoPickUpDate = entity.CargoPickUpDate
+                CargoWeight = cargoWeightDouble,
+                CargoPickUpDate = cargoPickUpDateDateOnly
             });
         }
 
