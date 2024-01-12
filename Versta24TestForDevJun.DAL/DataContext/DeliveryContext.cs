@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
 using Versta24TestForDevJun.DAL.Entities;
 
 namespace Versta24TestForDevJun.DAL.DataContext;

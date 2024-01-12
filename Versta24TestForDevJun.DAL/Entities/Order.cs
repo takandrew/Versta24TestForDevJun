@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Versta24TestForDevJun.DAL.Entities;
+﻿namespace Versta24TestForDevJun.DAL.Entities;
 
 public partial class Order
 {

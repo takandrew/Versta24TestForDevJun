@@ -1,35 +1,37 @@
-﻿@model IEnumerable<Versta24TestForDevJun.BLL.Models.Order>
+﻿@model IEnumerable<int>
 @{
     ViewData["Title"] = "Главная страница";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Список заказов</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Идентификатор</th>
-                <th>Адрес отправителя</th>
-                <th>Город отправителя</th>
-                <th>Адрес получателя</th>
-                <th>Город получателя</th>
-                <th>Вес груза</th>
-                <th>Дата забора груза</th>
-            </tr>
-        </thead>
-        <tbody>
+    <h1 class="display-4 mb-5">Список заказов</h1>
+    <div class="container">
+        <div class="row">
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>@item.Id</td>
-                    <td>@item.SenderAddress</td>
-                    <td>@item.SenderCity</td>
-                    <td>@item.RecipientAddress</td>
-                    <td>@item.RecipientCity</td>
-                    <td>@item.CargoWeight</td>
-                    <td>@item.CargoPickUpDate</td>
-                </tr>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 btn">
+                    <div class="card text-center" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-item-id="@item">
+                        <div class="card-body">
+                            <h5 class="card-title">Заказ №@item</h5>
+                        </div>
+                    </div>
+                </div>
             }
-        </tbody>
-    </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Заказ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            
+        </div>
+    </div>
 </div>

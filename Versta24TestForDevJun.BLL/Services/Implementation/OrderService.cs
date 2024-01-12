@@ -1,13 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Versta24TestForDevJun.BLL.Models;
-using Versta24TestForDevJun.BLL.Services.Abstract;
+﻿using Versta24TestForDevJun.BLL.Services.Abstract;
 using Versta24TestForDevJun.DAL.DataAccess.Abstract;
-using Versta24TestForDevJun.DAL.Entities;
 
 namespace Versta24TestForDevJun.BLL.Services.Implementation
 {
@@ -53,6 +45,26 @@ namespace Versta24TestForDevJun.BLL.Services.Implementation
                 });
             }
             return orderDTOList;
+        }
+
+        public IEnumerable<int> GetAllIds()
+        {
+            return _repository.GetAllIds();
+        }
+
+        public Models.Order GetByOrderId(int orderId)
+        {
+            var order = _repository.GetById(orderId);
+            return new Models.Order
+            {
+                Id = order.Id,
+                SenderAddress = order.SenderAddress,
+                SenderCity = order.SenderCity,
+                RecipientAddress = order.RecipientAddress,
+                RecipientCity = order.RecipientCity,
+                CargoWeight = order.CargoWeight,
+                CargoPickUpDate = order.CargoPickUpDate
+            };
         }
     }
 }

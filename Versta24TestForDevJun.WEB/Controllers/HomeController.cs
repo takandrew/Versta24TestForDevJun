@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using Versta24TestForDevJun.BLL.Models;
-using Versta24TestForDevJun.BLL.Services;
 using Versta24TestForDevJun.BLL.Services.Abstract;
 using Versta24TestForDevJun.WEB.Models;
 
@@ -18,10 +16,33 @@ namespace Versta24TestForDevJun.WEB.Controllers
             _orderService = orderService;
         }
 
+        
         public IActionResult Index()
         {
-            IEnumerable<Order> orderList = _orderService.GetAll();
+            IEnumerable<int> orderList = _orderService.GetAllIds();
             return View(orderList);
+        }
+
+        [HttpGet("Home/Index/{id}")]
+        public IActionResult Index(int id)
+        {
+            var order = _orderService.GetByOrderId(id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return new JsonResult(new
+            {
+                Id = order.Id,
+                SenderAddress = order.SenderAddress,
+                SenderCity = order.SenderCity,
+                RecipientAddress = order.RecipientAddress,
+                RecipientCity = order.RecipientCity,
+                CargoWeight = order.CargoWeight,
+                CargoPickUpDate = order.CargoPickUpDate
+            });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -12,7 +12,7 @@ namespace Versta24TestForDevJun.DAL
     {
         public static IServiceCollection RegisterRepositories(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IRepository<Order>, EFRepository<Order>>();
+            services.AddScoped<IRepository<Order>, OrderRepository>();
             services.AddEntityFrameworkNpgsql().AddDbContext<DeliveryContext>(options =>
             {
                 //options.UseNpgsql(configuration.GetConnectionString("DeliveryDb"));

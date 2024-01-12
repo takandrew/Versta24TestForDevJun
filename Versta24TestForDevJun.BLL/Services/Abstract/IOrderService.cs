@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Versta24TestForDevJun.BLL.Models;
+﻿using Versta24TestForDevJun.BLL.Models;
 
 namespace Versta24TestForDevJun.BLL.Services.Abstract
 {
@@ -11,5 +6,7 @@ namespace Versta24TestForDevJun.BLL.Services.Abstract
     {
         public Task CreateAsync(Order entity);
         public IEnumerable<Order> GetAll();
+        public IEnumerable<int> GetAllIds();
+        public Order GetByOrderId(int orderId);
     }
 }
