@@ -102,16 +102,11 @@ $('#formCreateOrder').submit(function (event) {
     event.preventDefault();
 
     // Получить данные формы
-    var formData = JSON.stringify($(this).serializeArray());
-        
-    var dataArray = JSON.parse(formData);
     var dataObject = {};
 
-    dataArray.forEach(function (item) {
+    $(this).serializeArray().forEach(function (item) {
         dataObject[item.name] = item.value;
     });
-
-    console.log(dataObject);
     
     // Выполнить AJAX-запрос
     $.ajax({
