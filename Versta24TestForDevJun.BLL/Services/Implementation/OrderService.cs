@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Text.RegularExpressions;
 using Versta24TestForDevJun.BLL.Models;
 using Versta24TestForDevJun.BLL.Services.Abstract;
 using Versta24TestForDevJun.DAL.DataAccess.Abstract;
@@ -70,6 +71,10 @@ namespace Versta24TestForDevJun.BLL.Services.Implementation
         public Models.Order GetByOrderId(int orderId)
         {
             var order = _repository.GetById(orderId);
+            if (order == null)
+            {
+                return null;
+            }
             return new Models.Order
             {
                 Id = order.Id,
